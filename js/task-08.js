@@ -7,7 +7,7 @@ const backdrop = document.querySelector('.lightbox');
 const closeBtn = document.querySelector('[data-action="close-lightbox"]');
 const bigPicLink = document.querySelector('.lightbox__image');
 
-// let smallPicLink;
+let picTarget;
 
 function createPictureTable({ preview, original, description }) {
     const listEL = document.createElement('li');
@@ -41,7 +41,7 @@ function onThePicClick(e) {
         return;
     }
     e.preventDefault();
-    // smallPicLink = e.target;
+    picTarget = e.target;
 
     bigPicLink.setAttribute('src', e.target.dataset.source);
     onOpenModalWindow();
@@ -76,13 +76,23 @@ function onEscKeyPress(e) {
 const picLiItem = document.querySelector('.gallery__item');
 console.log(picLiItem);
 
-// Пролистывание изображений галереи в открытом модальном окне клавишами "влево" 
-// и "вправо".        
-
+        
 function onRightOrLeftKeyPress(e) {
     if (e.code === 'ArrowRight') {
         console.log('Press Right');
+
+        let nextPicLi = e.target.parentElement.nextSibling;
+        bigPicLink.setAttribute('src', nextPicLi.dataset.source);
+        smallPicLink = nextPicLi;
+        // const nextPicLink = nextPicLi.target;
+        // bigPicLink.setAttribute('src', e.target.parentElement.nextSibling.dataset.source);
     } if (e.code === 'ArrowLeft') {
         console.log('Press Left')
+        // console.log(smallPicLink.previousSibling)
+        // bigPicLink.setAttribute('src', e.target.dataset.source);
     } 
 }
+
+// Пролистывание изображений галереи в открытом модальном окне клавишами "влево" 
+// и "вправо".
+
