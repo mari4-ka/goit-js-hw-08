@@ -84,15 +84,10 @@ function onRightOrLeftKeyPress(e) {
         let nextPicLi = e.target.parentElement.nextSibling;
         bigPicLink.setAttribute('src', nextPicLi.dataset.source);
         smallPicLink = nextPicLi;
-        // const nextPicLink = nextPicLi.target;
-        // bigPicLink.setAttribute('src', e.target.parentElement.nextSibling.dataset.source);
     } if (e.code === 'ArrowLeft') {
         console.log('Press Left')
-        // console.log(smallPicLink.previousSibling)
-        // bigPicLink.setAttribute('src', e.target.dataset.source);
     } 
 }
 
 // Пролистывание изображений галереи в открытом модальном окне клавишами "влево" 
 // и "вправо".
-
