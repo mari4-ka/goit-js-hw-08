@@ -5,7 +5,7 @@ const backdrop = document.querySelector('.lightbox');
 const closeBtn = document.querySelector('[data-action="close-lightbox"]');
 const bigPicLink = document.querySelector('.lightbox__image');
 
-let picTargetIndex;
+let picTarget;
 
 const createPictureTable = function (galleryItems) {
     
@@ -32,6 +32,30 @@ const createPictureTable = function (galleryItems) {
 
 createPictureTable(galleryItems);
 
+// function createPictureTable({ preview, original, description }) {
+//     const listEL = document.createElement('li');
+//     listEL.classList.add('gallery__item');
+    
+//     const linkEl = document.createElement('a');
+//     linkEl.classList.add('gallery__link');
+//     linkEl.setAttribute('href', `${original}`);
+    
+//     const imgEl = document.createElement('img');
+//     imgEl.classList.add('gallery__image');
+//     imgEl.setAttribute('src', `${preview}`);
+//     imgEl.setAttribute('data-source', `${original}`);
+//     // imgEl.setAttribute('data-index', i);
+//     imgEl.setAttribute('alt', `${description}`);
+    
+//     linkEl.append(imgEl);
+//     listEL.append(linkEl);
+    
+//     return listEL;
+// };
+
+// const elements = galleryItems.map(createPictureTable);
+// galleryPlaceEl.append(...elements);
+
 galleryPlaceEl.addEventListener('click', onThePicClick);
 closeBtn.addEventListener('click', onCloseModalWindow);
 backdrop.addEventListener('click', onBackdropClick);
@@ -41,13 +65,10 @@ function onThePicClick(e) {
         return;
     }
     e.preventDefault();
-
-    picTargetIndex = Number(e.target.dataset.index);
-    console.log('here it is', picTargetIndex);
+    picTarget = e.target;
 
     bigPicLink.setAttribute('src', e.target.dataset.source);
     onOpenModalWindow();
-    return picTargetIndex;
 }
 
 function onOpenModalWindow() {
@@ -76,19 +97,19 @@ function onEscKeyPress(e) {
         onCloseModalWindow();
     }
 }
+const picLiItem = document.querySelector('.gallery__item');
+console.log(picLiItem);
+
         
 function onRightOrLeftKeyPress(e) {
-
     if (e.code === 'ArrowRight') {
         console.log('Press Right');
-
-        picTargetIndex += 1;
-        bigPicLink.setAttribute('src', galleryItems[picTargetIndex].original);
 
     } if (e.code === 'ArrowLeft') {
         console.log('Press Left')
         
-        picTargetIndex -= 1;
-        bigPicLink.setAttribute('src', galleryItems[picTargetIndex].original);
     } 
 }
+
+// Пролистывание изображений галереи в открытом модальном окне клавишами "влево" 
+// и "вправо".
