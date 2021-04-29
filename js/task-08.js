@@ -43,11 +43,9 @@ function onThePicClick(e) {
     e.preventDefault();
 
     picTargetIndex = Number(e.target.dataset.index);
-    console.log('here it is', picTargetIndex);
 
     bigPicLink.setAttribute('src', e.target.dataset.source);
     onOpenModalWindow();
-    return picTargetIndex;
 }
 
 function onOpenModalWindow() {
@@ -80,15 +78,19 @@ function onEscKeyPress(e) {
 function onRightOrLeftKeyPress(e) {
 
     if (e.code === 'ArrowRight') {
-        console.log('Press Right');
+        if (picTargetIndex < galleryItems.length-1) {
+            picTargetIndex += 1;
+            bigPicLink.setAttribute('src', galleryItems[picTargetIndex].original);
+        } else {
+            onCloseModalWindow();
+        }
 
-        picTargetIndex += 1;
-        bigPicLink.setAttribute('src', galleryItems[picTargetIndex].original);
-
-    } if (e.code === 'ArrowLeft') {
-        console.log('Press Left')
-        
-        picTargetIndex -= 1;
-        bigPicLink.setAttribute('src', galleryItems[picTargetIndex].original);
+    } if (e.code === 'ArrowLeft') {   
+        if (picTargetIndex > 0) {
+            picTargetIndex -= 1;
+            bigPicLink.setAttribute('src', galleryItems[picTargetIndex].original);
+        } else {
+            onCloseModalWindow();
+        }
     } 
 }
